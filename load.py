@@ -74,7 +74,6 @@ class Player_shot(Sprite):
             self.orientation = 0
 
     def animation(self):
-        #testar dimencoes
         if(self.orientation == 1):
             if(abs(self.last_update - time.time()) >= 0.08):
                 self.x += 50
@@ -170,10 +169,7 @@ class Player(Sprite):
         xright = 1000
         xleft = 15
         speed = 9
-        #print(self.y)
 
-        #juntar o move keys com o true or false de jumping
-        #gravidade
         if(self.hp > 0):
             if(jumping):
                 if(orientation == 1):
@@ -192,7 +188,6 @@ class Player(Sprite):
             if(self.y <= ground):
                 self.y += 10
 
-            #se tiver atirando nao pode pular (erro?)
             if(key[pygame.K_e]):
                 if(abs(time.time() - fire_rate) > 0.3):
                     fire_rate = time.time()
@@ -309,7 +304,7 @@ class Enemys(Sprite):
     def __init__(self, __tela, __place=0, __x=-50, __y=340):
         __id = 'enemy'
         Sprite.__init__(self, __tela, __id, __x, __y)
-        # {x, y}, orientation, go_limit, alive
+
         r = random.randint(1, 5)
         dyingstr = str('sounds/soldier' + str(r) + '.wav')
         self.sfx_dying = pygame.mixer.Sound(dyingstr)
@@ -382,7 +377,6 @@ class Enemys(Sprite):
             proj = Enemy_shot(self.tela, p_x, p_y)
             self.tela.add_element(proj)
 
-    #die
     def hit(self):
         self.hp -= 1
         self.sfx_dying.play()
