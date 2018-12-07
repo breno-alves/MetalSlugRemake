@@ -61,7 +61,8 @@ pygame.display.set_caption('Metal Slug Remake')
 clock = pygame.time.Clock()
 pygame.font.init()
 font = pygame.font.Font('fonts/Square.ttf', 20)
-text_color = (0,200,200)
+#text_color = (0,200,200)
+text_color = (255, 0, 0)
 
 tela = animation.Animation(display)
 bg = load.Background(tela, 'bg')
@@ -74,6 +75,8 @@ sfx_gameover = pygame.mixer.Sound('sounds/gameover.wav')
 music_menu = False
 music_gameplay = False
 pygame.mixer.init()
+
+blink_red = player.hp
 
 while True:
     for event in pygame.event.get():
@@ -93,6 +96,7 @@ while True:
             pygame.mixer.music.load('sounds/music.mp3')
             pygame.mixer.music.play(-1)
 
+        display.blit(pygame.image.load('images/menu.jpg'), (0, 0))
         text_menu=font.render("Pressione [P] para jogar", True, text_color)
         text_menu_rect = text_menu.get_rect()
         text_menu_rect.center=(display.get_width()//2, display.get_height()//2)
@@ -121,7 +125,9 @@ while True:
         display.blit(font.render(('score:      ') + str(score) , True, (255,255,255)),(5,5))
         display.blit(font.render(('time:      ') + str(int(abs(time.time() - s_time))), True, (255,255,255)),(500,5))
         display.blit(font.render(('life:      ') + str(player.hp), True, (255,255,255)),(5,25))
-
+        if(blink_red != player.hp):
+            blink_red = player.hp
+            display.fill((255,0,0))
     elif(state == 'dead'):
         pygame.mixer.music.stop()
         sfx_gameover.play()
