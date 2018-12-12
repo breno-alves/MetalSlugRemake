@@ -1,1 +1,1 @@
-Sprites from: https://github.com/dsu1995/MetalPython
+Sprites and SFX from: https://github.com/dsu1995/MetalPython
